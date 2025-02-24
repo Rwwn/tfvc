@@ -218,12 +218,12 @@ func (c *Client) Versions(s source.Source) ([]*goversion.Version, error) {
 }
 
 func filterTerraformTags(s source.Source, versions []*goversion.Version) []*goversion.Version {
-	// This is dumb but hashicorp have left two random tags in their git repo for v11 and 26258 lol!!
+	// This is dumb but hashicorp have left three random tags in their git repo for v11, 26258 and 20240919 lol!!
 	// Here we simply remove these from the results.
 	vers := []*goversion.Version{}
 	if s.Git.Remote == "https://github.com/hashicorp/terraform.git" {
 		for _, v := range versions {
-			if v.String() != "11.0.0" && v.String() != "26258.0.0" {
+			if v.String() != "11.0.0" && v.String() != "26258.0.0" && v.String() != "20240919.0.0" {
 				vers = append(vers, v)
 			}
 		}
